@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hitster Random</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #121212;
+      color: white;
+    }
+    button {
+      padding: 1em 2em;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 10px;
+      background: #1DB954;
+      color: white;
+      cursor: pointer;
+    }
+    #countdown {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Hitster Random 🎵</h1>
+  <button onclick="playRandomSong()">Play Random Song</button>
+  <div id="countdown"></div>
+
+  <script src="songs.js"></script>
+  <script>
+    function playRandomSong() {
+      const countdownEl = document.getElementById("countdown");
+      let counter = 3;
+      countdownEl.textContent = `Get ready... ${counter}`;
+      
+      const interval = setInterval(() => {
+        counter--;
+        if (counter > 0) {
+          countdownEl.textContent = `Get ready... ${counter}`;
+        } else {
+          clearInterval(interval);
+          const randomIndex = Math.floor(Math.random() * songs.length);
+          const trackId = songs[randomIndex];
+          window.location.href = `https://open.spotify.com/track/${trackId}`;
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
